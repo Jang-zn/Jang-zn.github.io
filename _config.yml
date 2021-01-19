@@ -39,7 +39,7 @@ email: zn2309@naver.com
 avatar: assets/images/avatar.jpg
 
 # You'll want to customize url and baseurl for your own site:
-baseurl: "/blog" # the subpath of your site, e.g. /blog
+baseurl: "Jang-zn.github.io" # the subpath of your site, e.g. /blog
 url: "Jang-zn.github.io" # the base hostname & protocol for your site
 
 # Social settings

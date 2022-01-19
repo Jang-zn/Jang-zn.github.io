@@ -32,14 +32,14 @@ Future / async / await 내가 뭘 잘못쓰고 있는건지 계속 데이터 다
   - 회원 메인페이지 레이아웃 完
   - 어드민 메인페이지 레이아웃 + drawer 작업 完
   - 어드민 가입승인 페이지 → 完
-    <span style="color:red">- 회원 주간 근태 확인페이지 → GetX로 갈아엎고 진행</span>
-    <span style="color:red">- 어드민 회원별 주간 근태 확인페이지 → GetX로 갈아엎고 진행</span>
+    <span style="color:red">- 회원 주간 근태 확인페이지 → GetX로 갈아엎고 진행</span><br>
+    <span style="color:red">- 어드민 회원별 주간 근태 확인페이지 → GetX로 갈아엎고 진행</span><br>
 
 <h3>2. 기능</h3>
   - firebase를 통한 가입/로그인 기능 完
   - 출/퇴근 기능 完
-    <span style="color:red">- 멤버별 근태관련 DB 完 -- 뭔가 잘못돼서 뒤집어 엎고 다시 할 예정</span>
-    <span style="color:red">- 휴무신청 기능 미완 - 이 망할것때문에 다 갈아엎게 생김</span>
+    <span style="color:red">- 멤버별 근태관련 DB 完 -- 뭔가 잘못돼서 뒤집어 엎고 다시 할 예정</span><br>
+    <span style="color:red">- 휴무신청 기능 미완 - 이 망할것때문에 다 갈아엎게 생김</span><br>
 
 <h3>3. 남은거</h3>
   - 주단위 근태확인기능 (달력)

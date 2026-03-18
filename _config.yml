@@ -18,9 +18,9 @@ timezone: Asia/Seoul
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: 0년차 개발자                          # the main title
+title: 코드 대장간                          # the main title
 
-tagline: 어찌어찌 하다보니.. 개발자가 되었다   # it will display as the sub-title
+tagline: 생계형 개발자   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
   A minimal, portfolio, sidebar,
@@ -39,7 +39,7 @@ twitter:
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: 장우영
+  name: 코드대장간
   email: zn2309@naver.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
@@ -82,7 +82,7 @@ theme_mode:   # [light|dark]
 img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar: '/assets/img/profile.jpg'
+avatar: '/assets/img/profile.png'
 
 # boolean type, the global switch for ToC in posts.
 toc: true

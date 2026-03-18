@@ -39,13 +39,13 @@ src/
 // AdAdapter - 토스 광고 or 구글 애드몹 (이건 나중에 추가)
 ```
 
-로컬에서 `npm run dev` 하면 웹으로 돌아가고, 토스에 올리면 네이티브로 돌아간다. 됐다.
+로컬에서 `npm run dev` 하면 웹으로 돌아가고, 토스에 올리면 네이티브로 돌아간다. 출시 전에 토스 웹뷰 호환성도 확인해야 하는데, 이건 나중에 토스 개발자 문서 보고 점검할 예정.
 
-## MSW v2로 목 API 세팅
+## MSW v2로 목 API — BE 없이 FE 먼저
 
-백엔드가 아직 안 되어 있으니까 **MSW(Mock Service Worker) v2**로 전체 API를 목으로 만들었다. 레시피 CRUD, 인증, 검색 전부 다.
+백엔드가 아직 안 되어 있다. 근데 BE 기다리고 있을 여유가 없다. **MSW(Mock Service Worker) v2**로 전체 API를 목으로 만들었다. 레시피 CRUD, 인증, 검색 전부.
 
-Raw 타입(snake_case)으로 응답 주고 → Mapper에서 camelCase 도메인 모델로 변환하는 구조. 나중에 실제 API 붙일 때 Mapper만 검증하면 되게.
+Raw 타입(snake_case)으로 응답 주고 → Mapper에서 camelCase 도메인 모델로 변환하는 구조. 여기서 내가 고민한 건, **나중에 실제 API 붙일 때 얼마나 갈아엎어야 하느냐**는 것. Mapper를 중간에 껴두면 서버 응답 형식이 바뀌어도 Mapper만 수정하면 된다. 다만 이게 이론대로 될지는 실제 연동할 때 검증해야 한다. "api 서버랑 연결을 해야 phase2 이후를 할 수 있겠네" — 이건 처음부터 인지하고 있었던 병목이다.
 
 ## Phase 0 → 1 → 2, Claude Code랑 으쌰으쌰
 

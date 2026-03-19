@@ -13,7 +13,7 @@ render_with_liquid: false
 
 [어제](/posts/API-클라이언트-인프라-구축/) Axios 인터셉터에 snake_case ↔ camelCase 자동 변환을 넣었다. `caseConverter` 유틸이 재귀적으로 중첩 객체까지 전부 변환하는 구조. 오늘 지웠다.
 
-[BE에서 Jackson 전략을 바꿔서](/posts/Jackson-전략-변경과-mTLS/) 서버가 camelCase로 내려주게 됐기 때문이다. 클라이언트에서 변환할 이유가 없어졌다.
+[BE에서 Jackson 전략을 바꿔서](/posts/Jackson-전략-변경과-mTLS/) 서버가 camelCase로 내려주게 됐기 때문이다. 원래 BE의 snake_case 설정 자체가 Claude가 초기 세팅 때 넣어둔 거였다. 서버도 FE도 내가 다 개발하는데 굳이 snake_case를 쓸 이유가 없다. 서버를 camelCase로 통일하면 클라이언트에서 변환할 이유가 없어진다.
 
 ## 제거한 것
 

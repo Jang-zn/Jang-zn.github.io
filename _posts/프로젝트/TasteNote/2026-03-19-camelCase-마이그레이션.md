@@ -11,7 +11,7 @@ render_with_liquid: false
 
 ## 서버가 바뀌었으니 프론트도 바꾼다
 
-[BE에서 Jackson 네이밍 전략을 바꿔서](/posts/Jackson-전략-변경과-mTLS/) API 응답이 전부 camelCase로 내려오게 됐다. TasteNote FE에서는 Raw 타입과 mapper에서 snake_case 키를 camelCase로 매핑하고 있었다. 이제 서버가 camelCase로 주니까 이 매핑이 전부 불필요하다.
+[BE에서 Jackson 네이밍 전략을 바꿨다](/posts/Jackson-전략-변경과-mTLS/). Claude가 초기 세팅 때 넣어둔 snake_case 설정을 발견하고 camelCase로 통일한 것. 서버도 FE도 내가 다 만드는데, 서버가 snake_case를 내려보내면 FE에서 매번 변환해야 한다. TasteNote FE에서도 Raw 타입과 mapper에서 snake_case 키를 일일이 camelCase로 매핑하고 있었다. 이제 서버가 camelCase로 주니까 이 매핑이 전부 불필요하다.
 
 ## 4단계로 나눠서 진행
 

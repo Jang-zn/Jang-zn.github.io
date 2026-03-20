@@ -36,7 +36,7 @@ const useTermDetail = (termId: string) =>
   useQuery({ queryKey: ['terms', termId], ... });
 ```
 
-두 훅 모두 queryKey가 `['terms', 문자열]` 형태다. `type`과 `termId` 값이 우연히 겹치지 않더라도, **의미가 다른 데이터가 같은 네임스페이스를 공유**하는 것 자체가 문제다. 캐시 무효화할 때 `queryClient.invalidateQueries({ queryKey: ['terms'] })`를 하면 양쪽 다 날아간다.
+두 훅 모두 queryKey가 `['terms', 문자열]` 형태다. `type`과 `termId` 값이 우연히 겹치지 않더라도, **의미가 다른 데이터가 같은 네임스페이스를 공유**하는 것 자체가 문제다. 아파트 호수를 "301호"라고만 적어두면, A동 301호인지 B동 301호인지 구분이 안 되는 것과 같다. 캐시 무효화할 때 `queryClient.invalidateQueries({ queryKey: ['terms'] })`를 하면 양쪽 다 날아간다.
 
 ## 해결: 의미 단위로 키 분리
 

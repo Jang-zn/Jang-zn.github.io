@@ -20,7 +20,7 @@ render_with_liquid: false
 
 ## Interceptor가 뭔지
 
-Axios에서 HTTP 요청이 나가기 전, 응답이 돌아온 후에 **가로채서 뭔가를 할 수 있는 훅**이다. Express의 미들웨어, Spring의 Filter/Interceptor랑 비슷한 개념.
+Axios에서 HTTP 요청이 나가기 전, 응답이 돌아온 후에 **가로채서 뭔가를 할 수 있는 훅**이다. 공항 보안 검색대 같은 거다. 출국할 때(요청) 짐 검사하고, 입국할 때(응답) 세관 통과하는 것. Express의 미들웨어, Spring의 Filter/Interceptor랑 비슷한 개념.
 
 ```
 [컴포넌트] → [Request Interceptor] → [서버]
@@ -112,7 +112,7 @@ BE가 항상 `ApiResponse` 래퍼로 주는 게 아니다. Spring Security에서
 
 401이 오면 refresh token으로 새 access token을 받아서 원래 요청을 재시도한다. 이것도 Response Interceptor에서 처리.
 
-여기서 중요한 건 **동시 요청 처리**다. 요청 A, B가 동시에 401을 받으면 리프레시가 2번 발생한다. 첫 번째 리프레시가 진행 중이면 나머지 요청은 Promise 큐에 넣어두고, 리프레시 완료 후 새 토큰으로 일괄 재시도한다.
+여기서 중요한 건 **동시 요청 처리**다. 식당에서 "재료 떨어졌어요"라는 답을 손님 3명이 동시에 받으면, 재료 주문을 3번 하면 안 된다. 한 명이 주문하고 나머지는 기다려야 한다. 요청 A, B가 동시에 401을 받으면 리프레시가 2번 발생한다. 첫 번째 리프레시가 진행 중이면 나머지 요청은 Promise 큐에 넣어두고, 리프레시 완료 후 새 토큰으로 일괄 재시도한다.
 
 ## Interceptor 실행 순서
 

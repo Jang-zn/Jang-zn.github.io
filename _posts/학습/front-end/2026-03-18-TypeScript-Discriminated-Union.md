@@ -21,7 +21,7 @@ interface ApiResponse<T> {
 }
 ```
 
-이러면 `success`가 `true`인데 `data`가 `null`인 상태가 타입적으로 허용된다. `success`가 `false`인데 `error`가 `null`인 것도 마찬가지. 타입 시스템이 잘못된 상태를 허용하고 있다.
+이러면 `success`가 `true`인데 `data`가 `null`인 상태가 타입적으로 허용된다. "합격인데 점수 없음" 같은 말이 안 되는 상태가 타입 시스템을 통과해버리는 거다. `success`가 `false`인데 `error`가 `null`인 것도 마찬가지. 타입 시스템이 잘못된 상태를 허용하고 있다.
 
 ## Discriminated Union이 뭔지
 
@@ -87,7 +87,7 @@ if (isTermType(type)) {
 }
 ```
 
-`value is TermType`이 핵심이다. 이게 TypeScript에게 "이 함수가 `true`를 반환하면 `value`는 `TermType`이야"라고 알려주는 거다. 일반 `boolean` 반환과 다르게 타입이 좁혀진다.
+`value is TermType`이 핵심이다. 클럽 입구의 신분증 확인 같은 거다. "이 사람이 성인이면 입장시켜" — 확인 후에는 안에서 나이를 다시 물을 필요가 없다. TypeScript에게 "이 함수가 `true`를 반환하면 `value`는 `TermType`이야"라고 알려주는 거다. 일반 `boolean` 반환과 다르게 타입이 좁혀진다.
 
 ## Java의 sealed interface랑 비교
 

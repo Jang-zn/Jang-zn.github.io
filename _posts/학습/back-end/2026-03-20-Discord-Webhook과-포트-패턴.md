@@ -27,7 +27,7 @@ infra-discord (어댑터 구현)
   └── DiscordWebhookAdapter implements DiscordNotificationPort
 ```
 
-포트는 인터페이스다. 도메인은 "알림을 보낸다"는 것만 알고, 어떻게 보내는지는 모른다. [클린 아키텍처 인프라 추상화](/posts/클린-아키텍처-인프라-추상화/)에서 Redis, JPA에 적용한 것과 같은 패턴이다.
+포트는 인터페이스다. 벽에 있는 콘센트 구멍이라고 보면 된다. 도메인은 "전기를 쓴다"는 것만 알고, 뒤에서 화력발전인지 태양광인지는 모른다. Discord가 Slack으로 바뀌어도 콘센트 뒤의 배선만 바꾸면 된다. [클린 아키텍처 인프라 추상화](/posts/클린-아키텍처-인프라-추상화/)에서 Redis, JPA에 적용한 것과 같은 패턴이다.
 
 알림 데이터도 VO(Value Object)로 분리했다. `FeedbackNotification`, `AlertNotification`, `ReportNotification` — 각각 필요한 필드만 가진다.
 
@@ -41,7 +41,7 @@ infra-discord (어댑터 구현)
 
 서버 에러 알림을 보내려면 `GlobalExceptionHandler`에서 Discord 포트를 호출해야 한다. 근데 예외 처리기에 알림 로직이 직접 들어가면 결합도가 높아진다.
 
-`ServerErrorEvent`를 발행하고, 별도의 `ServerErrorEventListener`가 비동기로 받아서 Discord로 보낸다. 예외 처리기는 이벤트만 발행하고 끝. 알림 실패가 예외 응답에 영향을 주지 않도록 try-catch로 감싼다.
+`ServerErrorEvent`를 발행하고, 별도의 `ServerErrorEventListener`가 비동기로 받아서 Discord로 보낸다. 사내 방송으로 "5층에서 문제 발생"이라고 틀면, 담당자가 알아서 처리하러 가는 구조다. 방송하는 사람이 직접 뛰어갈 필요 없다. 예외 처리기는 이벤트만 발행하고 끝. 알림 실패가 예외 응답에 영향을 주지 않도록 try-catch로 감싼다.
 
 ## Rate Limiting
 
@@ -59,7 +59,7 @@ Discord API는 분당 30건 제한이 있다. 서버 에러가 폭주하면 rate
 | Embed 필드 | SHORT (name 등) | 256자 truncate |
 | Embed 필드 | LONG (description 등) | 1024자 truncate |
 
-API 레벨에서 거부하는 것과 Embed 레벨에서 잘라내는 것은 다르다. API 검증은 사용자에게 에러를 돌려주고, Embed 절단은 Discord가 에러를 뱉지 않게 하는 안전장치다.
+API 레벨에서 거부하는 것과 Embed 레벨에서 잘라내는 것은 다르다. 놀이공원 입구에서 키 제한으로 막는 것(API 검증)과, 좌석 안전바가 자동으로 조절되는 것(Embed 절단). API 검증은 사용자에게 에러를 돌려주고, Embed 절단은 Discord가 에러를 뱉지 않게 하는 안전장치다.
 
 ## Webhook URL 로그 마스킹
 

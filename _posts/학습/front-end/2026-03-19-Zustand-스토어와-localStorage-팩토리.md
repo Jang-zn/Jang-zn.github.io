@@ -39,7 +39,7 @@ interface CoachMarkState {
 }
 ```
 
-Zustand의 특징은 상태와 액션을 한 인터페이스에 선언한다는 것. Redux처럼 action type 상수, action creator, reducer를 분리하지 않는다. `create((set, get) => ({...}))` 한 줄로 스토어가 만들어진다.
+Zustand의 특징은 상태와 액션을 한 인터페이스에 선언한다는 것. Redux가 서류 양식 3장(action type, action creator, reducer)을 작성해야 물건을 꺼낼 수 있는 창고라면, Zustand는 냉장고 메모판이다. 적고 떼면 끝. `create((set, get) => ({...}))` 한 줄로 스토어가 만들어진다.
 
 ### set과 get
 
@@ -80,7 +80,7 @@ useCoachMarkStore.getState().start('home', homeSteps);
 
 ## localStorage 팩토리 패턴
 
-localStorage를 직접 쓰면 키 이름 오타, try-catch 중복, 값 포맷 불일치 같은 문제가 생긴다. 팩토리 패턴으로 공통 로직을 캡슐화했다.
+localStorage를 직접 쓰면 키 이름 오타, try-catch 중복, 값 포맷 불일치 같은 문제가 생긴다. 도장을 매번 수작업으로 깎는 것과 같다. 팩토리 패턴은 "이름만 넣으면 도장이 나오는 기계"다. 공통 로직을 캡슐화했다.
 
 ```tsx
 // 영구 플래그

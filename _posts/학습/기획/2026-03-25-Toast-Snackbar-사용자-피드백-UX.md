@@ -1,93 +1,170 @@
 ---
-title: "[학습] Toast, Snackbar — 사용자 피드백 UX와 Feedback Gap"
+title: "[학습] 사용자 피드백 UX — Feedback Gap, Toast, Snackbar, Optimistic UI"
 author:
   name: 코드대장간
   link: https://github.com/Jang-zn
 date: 2026-03-25 20:00:00 +0900
 categories: [학습, 기획]
-tags: [학습, React, Toast, Snackbar, UX, 피드백]
+tags: [학습, React, Toast, Snackbar, UX, 피드백, OptimisticUI]
 difficulty: ⭐2
 render_with_liquid: false
 ---
 
-## 버튼을 눌렀는데 아무 반응이 없으면
+## 사용자가 "됐나, 안 됐나" 모르면 다시 누른다
 
-사용자는 다시 누른다. 아니면 "안 됐나?" 하고 뒤로 갔다 들어온다. 이게 Feedback Gap이다.
+피드백이 없는 인터페이스는 벽에 대고 말하는 것과 같다. 아무 반응 없으면 사용자는 행동을 반복하거나, 이탈하거나, 뭔가 잘못됐다고 판단한다.
 
 ---
 
-## Feedback Gap
+## Visibility of System Status — Nielsen의 첫 번째 원칙
 
-**정의**: 사용자가 행동을 취한 후 시스템 반응이 오기까지의 공백. 이 공백이 인지되면 불안감이 생긴다.
+**정의**: 시스템이 지금 무슨 상태인지 사용자에게 항상 알려줘야 한다.
 
-0.1초 이내: 즉각 반응처럼 느낌
-0.3초 초과: "됐나?" 의식이 생기기 시작
-1초 초과: 명시적 로딩 표시가 없으면 사용자는 "안 됐다"고 판단하고 재시도
+**출처**: Nielsen, J. (1994). *"10 Usability Heuristics for User Interface Design"* — Nielsen Norman Group. Heuristic #1.
 
-비동기 작업(API 호출, 파싱 등)은 구조상 Feedback Gap이 발생한다. 이를 메우는 도구가 Toast와 Snackbar다.
+"항상 합리적인 시간 안에 적절한 피드백을 통해 사용자에게 현재 상태를 알려라."
+
+10가지 원칙 중 1번. 그게 우선순위를 말해준다. 상태 가시성이 없으면 나머지 원칙도 의미가 없다.
+
+적용 범위:
+- 버튼 클릭 → 즉각 시각 반응 (눌림 효과, 로딩 스피너)
+- 비동기 작업 → 진행 중임을 알리는 상태 표시
+- 완료 → 성공/실패 명확히 구분
+
+---
+
+## Feedback Gap과 Response Time 연구
+
+**Feedback Gap 정의**: 사용자가 행동을 취한 후 시스템 반응이 오기까지의 공백.
+
+**Response Time 기준**: Nielsen, J. (1993). *"Response Times: The 3 Important Limits"*. 원래 Miller(1968)가 제안한 0.1/1/10초 프레임워크를 UI에 적용.
+
+| 한계 | 기준 | 사용자 경험 |
+|------|------|-----------|
+| 0.1초 | 즉각 반응 | "내가 한 거야" 느낌. 피드백 불필요. |
+| 1초 | 흐름 유지 | 생각의 흐름이 끊기지 않는 한계. 스피너 불필요하지만 있으면 좋음. |
+| 10초 | 주의 유지 한계 | 이 이상이면 사용자는 딴 짓을 시작하거나 이탈. 진행 표시 필수. |
+
+모바일 API 호출의 평균 RTT는 300ms~2s다. "1초 이내"에 들어오는 경우도 있지만 네트워크 상태에 따라 달라진다. 항상 피드백을 준다고 보수적으로 설계하는 게 낫다.
+
+**Feedback Gap이 문제가 되는 순간**: 버튼을 눌렀는데 0.3초 이상 아무 변화가 없으면 사용자는 "안 됐나?" 생각하고 다시 누른다. 중복 요청이 발생하는 이유가 여기에 있다.
 
 ---
 
 ## Toast vs Snackbar
 
-같은 알림처럼 보이지만 목적이 다르다.
+같은 "알림"처럼 보이지만 목적이 다르다.
 
 | | Toast | Snackbar |
 |---|---|---|
-| 용도 | 즉각 결과 알림 | 진행 상태 + 결과 |
-| 지속 시간 | 2~3초 자동 사라짐 | 작업 완료까지 유지 |
-| 위치 | 상단 | 하단 |
-| 상호작용 | 없음 (읽기만) | 탭하면 상세 이동 가능 |
+| 목적 | 즉각 결과 알림 | 진행 상태 + 결과 |
+| 지속 시간 | 2~4초 자동 소멸 | 작업 완료까지 유지 가능 |
+| 위치 | 상단 (모바일 기준) | 하단 |
+| 상호작용 | 없음 | 탭 → 상세 이동 |
+| 사용 케이스 | 저장 완료, 삭제, 전송 | 백그라운드 작업 진행 중 |
 
-식당 비유: "주문 접수됐습니다" → Toast. 주방 화면의 "3번 테이블 조리 중" → Snackbar.
+비유: 식당 직원이 "주문 접수됐습니다"라고 말하는 게 Toast. 주방 위 화면에 "3번 테이블 조리 중"이 계속 떠있는 게 Snackbar.
 
-**Toast를 써야 할 때**: 저장 완료, 삭제 완료, 전송 완료 등 단순 결과 확인.
-**Snackbar를 써야 할 때**: 백그라운드 작업이 진행 중이고, 완료 후 다른 화면으로 이동 가능할 때.
+**Android Material Design**은 둘을 명확히 구분한다. Toast는 시스템 레벨, Snackbar는 앱 레벨. iOS는 Snackbar 개념이 없고 Banner(알림 배너)가 유사 역할을 한다.
 
 ---
 
-## Toast 위치: 상단이어야 하는 이유
+## Toast 위치: 왜 상단인가
 
-습관적으로 하단에 두는 경우가 많다. 모바일 실기기로 테스트하면 문제가 드러난다.
+"하단이 더 보기 편하다"는 생각이 있다. 엄지가 거기 있으니까.
 
-모바일 하단은 엄지 조작 영역이다. Toast가 손에 가려진다. 노치/Dynamic Island 기기는 상단도 고려해야 한다.
+모바일에서 하단은 엄지 조작 영역이다. Toast가 손에 가려진다. 반응이 없는 게 아니라 보이지 않는 거다. 실기기 테스트 없이 에뮬레이터나 스크린샷으로만 확인하면 발견이 늦다.
+
+상단으로 올리면 노치/Dynamic Island 문제가 생긴다. `safe-area-inset-top`으로 해결한다.
 
 ```css
 top: max(env(safe-area-inset-top), 12px);
 ```
 
-`env(safe-area-inset-top)`: 노치, Dynamic Island 등 시스템 UI가 차지하는 영역. 값이 있는 기기에서는 그 아래부터 표시. 없는 기기에서는 0이 되니까 `max`로 최소값 보장.
+`env(safe-area-inset-top)`: iOS에서 노치 또는 Dynamic Island 높이를 반환하는 CSS 환경 변수. 해당 기기가 없으면 0. `max`로 감싸서 최소 12px 보장.
 
 ---
 
-## 피드백 색상: 성공/실패 분리
+## 피드백 색상: 색만으로 의미를 전달하면 안 된다
 
-같은 색상으로 성공과 에러를 표시하면 신호가 없는 신호등이다. 사용자는 텍스트를 읽기 전에 색으로 결과를 판단한다.
+성공/에러를 색상으로만 구분하는 설계는 두 가지 문제가 있다.
 
-성공 → 녹색 계열
-에러 → 붉은색 계열
-정보 → 파란색 계열
+1. **색맹 접근성**: 전체 인구의 약 8%(남성 기준)가 적색-녹색 구분에 어려움을 겪는다. 색만으로 성공/에러를 구분하면 접근성 이슈다.
+2. **정보 누락**: 색을 인식해도 맥락이 없으면 의미가 모호하다.
 
-개발 중에는 인지하기 어렵다. 내가 만들었으니까 텍스트를 읽는다. 에러 메시지가 녹색으로 뜨는 걸 QA 단계에 가서야 발견하는 이유가 이거다.
+WCAG(Web Content Accessibility Guidelines) 1.4.1: "색상을 유일한 시각적 수단으로 정보를 전달해서는 안 된다."
+
+실용적 해결: 색상 + 아이콘 + 텍스트를 세트로. 성공은 체크 아이콘 + 녹색 + "완료", 에러는 X 아이콘 + 붉은색 + "실패 이유".
 
 ---
 
-## Snackbar와 staleTime의 관계
+## Optimistic UI
 
-Snackbar가 떠있는 동안 그 뒤 목록이 갱신되면 레이아웃이 바뀐다. 사용자가 Snackbar를 읽고 있는 상태에서 화면이 움직이는 거다.
+**정의**: 서버 응답을 기다리지 않고 UI를 먼저 성공 상태로 업데이트하는 패턴. 요청이 실패하면 롤백.
 
-React Query의 `staleTime`은 캐시를 얼마나 "신선"하게 유지할지 결정한다. Snackbar 표시 시간보다 `staleTime`이 짧으면 Snackbar가 살아있는 동안 목록이 리페치될 수 있다.
+**예시**: 트위터 좋아요 버튼. 누르면 즉시 하트가 빨개지고, 서버와는 백그라운드에서 동기화. 실패하면 다시 원래 상태로.
 
-Snackbar 지속 시간 > staleTime이면 이 문제가 생긴다. Snackbar 타이머보다 충분히 긴 staleTime을 설정하거나, Snackbar 활성 상태일 때 리페치를 막는 방식으로 해결한다.
+**장점**: 0.1초 이내 반응 → "즉각 반응" 경험. Feedback Gap 제거.
+**단점**: 실패 시 롤백 UX를 설계해야 한다. 실패가 드물고, 실패 시 사용자가 이해할 수 있는 피드백이 가능한 경우에 적합.
+
+Optimistic UI가 적합한 경우:
+- 성공률이 99%에 가까운 작업
+- 실패해도 사용자가 다시 시도하기 쉬운 경우
+- 지연이 사용자 경험에 크게 영향을 미치는 경우
+
+적합하지 않은 경우:
+- 결제, 계좌이체 같이 실패 시 심각한 영향
+- 실패가 자주 발생하는 환경
+
+---
+
+## Skeleton UI vs Spinner
+
+둘 다 "로딩 중"을 표시하지만 체감이 다르다.
+
+| | Skeleton UI | Spinner |
+|---|---|---|
+| 원리 | 콘텐츠 구조를 미리 보여줌 | 진행 중임을 표시 |
+| 체감 대기시간 | 짧아 보임 | 길어 보임 |
+| 적합한 상황 | 콘텐츠 구조가 예측 가능할 때 | 완료 시간 불확실 |
+
+Facebook이 Skeleton UI를 도입한 연구(2014): 같은 로딩 시간에서 Skeleton이 Spinner보다 체감 대기시간을 의미있게 줄였다.
+
+**왜 짧아 보이나**: 콘텐츠가 들어올 공간이 이미 있으니까 레이아웃이 바뀌지 않는다. 레이아웃 변화(Content Layout Shift)가 없으면 완료까지 자연스럽게 이어진다.
+
+**Spinner가 맞는 경우**: 완료 시간이 정말 불확실하거나, 화면 전체를 바꿔야 하는 작업(페이지 이동). 파일 업로드처럼 진행률을 퍼센트로 보여줄 수 있으면 Progress Bar가 더 좋다.
+
+---
+
+## Transient vs Persistent 알림
+
+| | Transient | Persistent |
+|---|---|---|
+| 예시 | Toast, Snackbar | 배지, 상태 표시줄, 배너 |
+| 지속 | 자동 소멸 | 사용자가 처리할 때까지 유지 |
+| 적합 | 참고용 정보, 성공 알림 | 반드시 처리해야 하는 상태 |
+
+읽지 않은 메시지는 Persistent(배지). "저장됐습니다"는 Transient(Toast). 잘못된 사례: "에러가 발생했습니다"를 Toast로 2초 보여주는 것. 사용자가 못 읽고 사라지면 에러를 인지 못한다. 에러는 Persistent가 맞다.
 
 ---
 
 ## TasteNote 적용
 
-레시피 등록 결과 화면이 두 가지 경로에서 달랐다. 캐시 히트(즉시)와 SSE 파싱(5~15초)이 서로 다른 UI로 처리됐다.
-
-같은 결과인데 다른 피드백은 일관성이 없다. 두 경로 모두 홈 Snackbar로 통일했다. 캐시 히트도 홈으로 이동 후 Snackbar 표시 → 상세 이동 플로우로 맞췄다.
-
-레시피 수정 완료 시 Toast가 없어서 Feedback Gap이 있었다. "저장됐나?" 확인하러 뒤로 갔다 들어오는 상황. `onAllDone` 콜백에 `showToast` 한 줄로 해결.
+- 캐시 히트(즉시)와 SSE 파싱(5~15초) 경로 모두 홈 Snackbar로 통일. 같은 결과에 다른 UI는 일관성 위반.
+- 레시피 수정 완료 시 Feedback Gap 있었음 → `showToast` 한 줄로 해결.
+- Toast 위치 하단 → 상단으로. 실기기에서 손에 가려지는 문제.
+- 에러 Toast는 붉은색, 성공 Toast는 녹색으로 분리.
+- Snackbar `staleTime`: 4초 타이머 동안 목록이 리페치되지 않도록 30초로 설정.
 
 상세 구현은 [토스트 통일과 인앱결제 UI](/posts/토스트-통일과-인앱결제-UI/) 참고.
+
+---
+
+## 참고자료
+
+- Nielsen, J. (1994). *10 Usability Heuristics*. Nielsen Norman Group
+- Nielsen, J. (1993). *Response Times: The 3 Important Limits*. Nielsen Norman Group
+- Miller, R.B. (1968). *Response Time in Man-Computer Conversational Transactions*. AFIPS Conference Proceedings
+- WCAG 2.1, Criterion 1.4.1: Use of Color
+- Material Design 3: *Snackbars*, *Dialogs* — m3.material.io
+- Apple HIG: *Alerts, Banners* — developer.apple.com/design/human-interface-guidelines

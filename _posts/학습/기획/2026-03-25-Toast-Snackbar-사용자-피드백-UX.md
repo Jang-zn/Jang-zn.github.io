@@ -16,7 +16,7 @@ render_with_liquid: false
 
 ---
 
-## Visibility of System Status — Nielsen의 첫 번째 원칙
+## 시스템 상태의 가시성(Visibility of System Status) — Nielsen의 첫 번째 원칙
 
 **정의**: 시스템이 지금 무슨 상태인지 사용자에게 항상 알려줘야 한다.
 
@@ -98,7 +98,7 @@ WCAG(Web Content Accessibility Guidelines) 1.4.1: "색상을 유일한 시각적
 
 ---
 
-## Optimistic UI
+## 낙관적 UI(Optimistic UI)
 
 **정의**: 서버 응답을 기다리지 않고 UI를 먼저 성공 상태로 업데이트하는 패턴. 요청이 실패하면 롤백.
 
@@ -107,7 +107,7 @@ WCAG(Web Content Accessibility Guidelines) 1.4.1: "색상을 유일한 시각적
 **장점**: 0.1초 이내 반응 → "즉각 반응" 경험. Feedback Gap 제거.
 **단점**: 실패 시 롤백 UX를 설계해야 한다. 실패가 드물고, 실패 시 사용자가 이해할 수 있는 피드백이 가능한 경우에 적합.
 
-Optimistic UI가 적합한 경우:
+낙관적 UI가 적합한 경우:
 - 성공률이 99%에 가까운 작업
 - 실패해도 사용자가 다시 시도하기 쉬운 경우
 - 지연이 사용자 경험에 크게 영향을 미치는 경우
@@ -136,15 +136,15 @@ Facebook이 Skeleton UI를 도입한 연구(2014): 같은 로딩 시간에서 Sk
 
 ---
 
-## Transient vs Persistent 알림
+## 일시적 알림 vs 지속적 알림(Transient vs Persistent)
 
-| | Transient | Persistent |
+| | 일시적(Transient) | 지속적(Persistent) |
 |---|---|---|
 | 예시 | Toast, Snackbar | 배지, 상태 표시줄, 배너 |
 | 지속 | 자동 소멸 | 사용자가 처리할 때까지 유지 |
 | 적합 | 참고용 정보, 성공 알림 | 반드시 처리해야 하는 상태 |
 
-읽지 않은 메시지는 Persistent(배지). "저장됐습니다"는 Transient(Toast). 잘못된 사례: "에러가 발생했습니다"를 Toast로 2초 보여주는 것. 사용자가 못 읽고 사라지면 에러를 인지 못한다. 에러는 Persistent가 맞다.
+읽지 않은 메시지는 지속적 알림(배지). "저장됐습니다"는 일시적 알림(Toast). 잘못된 사례: "에러가 발생했습니다"를 Toast로 2초 보여주는 것. 사용자가 못 읽고 사라지면 에러를 인지 못한다. 에러는 Persistent가 맞다.
 
 ---
 

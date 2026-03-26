@@ -23,7 +23,7 @@ layout: page
         {% capture this_month %}{{ post.date | date: _mth_df }}{% endcapture %}
         <span class="date day">{{ this_day }}</span>
         <span class="date month small text-muted">{% include no-zero-date.html date_str=this_month %}</span>
-        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        <a href="{{ post.url | relative_url }}">{% if post.difficulty %}{{ post.difficulty }} {% endif %}{{ post.title }}</a>
       </div>
     </li>
   {% if forloop.last %}

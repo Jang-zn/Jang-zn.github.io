@@ -6,6 +6,7 @@ author:
 date: 2026-03-26 23:00:00 +0900
 categories: [학습, Frontend]
 tags: [학습, React, Pointer Events, 드래그드롭, 모바일, 터치]
+difficulty: ⭐7
 render_with_liquid: false
 ---
 

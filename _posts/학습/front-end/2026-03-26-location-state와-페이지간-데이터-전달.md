@@ -6,6 +6,7 @@ author:
 date: 2026-03-26 14:00:00 +0900
 categories: [학습, Frontend]
 tags: [학습, React, Router, location.state, 네비게이션]
+difficulty: ⭐4
 render_with_liquid: false
 ---
 

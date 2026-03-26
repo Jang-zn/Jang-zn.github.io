@@ -6,6 +6,7 @@ author:
 date: 2026-03-20 12:00:00 +0900
 categories: [학습, Backend]
 tags: [학습, Discord, Webhook, Clean Architecture, 비동기]
+difficulty: ⭐6
 render_with_liquid: false
 ---
 

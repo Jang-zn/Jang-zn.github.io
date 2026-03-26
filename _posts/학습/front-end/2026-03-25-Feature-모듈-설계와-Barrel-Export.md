@@ -6,6 +6,7 @@ author:
 date: 2026-03-25 21:00:00 +0900
 categories: [학습, Frontend]
 tags: [학습, React, FSD, Feature, Barrel Export, 아키텍처]
+difficulty: ⭐4
 render_with_liquid: false
 ---
 

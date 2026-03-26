@@ -6,6 +6,7 @@ author:
 date: 2026-03-18 20:00:00 +0900
 categories: [학습, Frontend]
 tags: [학습, Axios, Interceptor, API, TypeScript]
+difficulty: ⭐4
 render_with_liquid: false
 ---
 

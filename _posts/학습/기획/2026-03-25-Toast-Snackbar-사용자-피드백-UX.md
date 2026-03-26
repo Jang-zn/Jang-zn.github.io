@@ -4,8 +4,9 @@ author:
   name: 코드대장간
   link: https://github.com/Jang-zn
 date: 2026-03-25 20:00:00 +0900
-categories: [학습, Frontend]
+categories: [학습, 기획]
 tags: [학습, React, Toast, Snackbar, SSE, UX, 피드백]
+difficulty: ⭐2
 render_with_liquid: false
 ---
 

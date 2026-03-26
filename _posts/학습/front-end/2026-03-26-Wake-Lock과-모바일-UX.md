@@ -6,6 +6,7 @@ author:
 date: 2026-03-26 12:00:00 +0900
 categories: [학습, Frontend]
 tags: [학습, Wake Lock, 모바일, UX, Web API]
+difficulty: ⭐4
 render_with_liquid: false
 ---
 

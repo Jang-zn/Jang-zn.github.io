@@ -6,6 +6,7 @@ author:
 date: 2026-03-25 17:00:00 +0900
 categories: [학습, Backend]
 tags: [학습, Spring, ConditionalOnProperty, 멀티모듈, 빈충돌]
+difficulty: ⭐5
 render_with_liquid: false
 ---
 

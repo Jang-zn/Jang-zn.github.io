@@ -6,6 +6,7 @@ author:
 date: 2026-03-26 11:00:00 +0900
 categories: [학습, Frontend]
 tags: [학습, React, Zustand, persist, localStorage, 상태관리]
+difficulty: ⭐5
 render_with_liquid: false
 ---
 

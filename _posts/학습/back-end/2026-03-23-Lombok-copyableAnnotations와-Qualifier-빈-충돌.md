@@ -6,6 +6,7 @@ author:
 date: 2026-03-23 16:00:00 +0900
 categories: [학습, Backend]
 tags: [학습, Lombok, Spring, Qualifier, DI, 빈 충돌]
+difficulty: ⭐5
 render_with_liquid: false
 ---
 

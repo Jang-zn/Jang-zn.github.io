@@ -6,6 +6,7 @@ author:
 date: 2026-03-18 20:10:00 +0900
 categories: [학습, Frontend]
 tags: [학습, TypeScript, 타입 시스템, Discriminated Union]
+difficulty: ⭐4
 render_with_liquid: false
 ---
 

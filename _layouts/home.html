@@ -68,6 +68,11 @@ layout: page
         <i class="far fa-clock fa-fw"></i>
         {% include read-time.html content=post.content %}
 
+        <!-- difficulty -->
+        {% if post.difficulty %}
+        <span class="post-difficulty">{{ post.difficulty }}</span>
+        {% endif %}
+
         <!-- categories -->
         {% if post.categories.size > 0 %}
           <i class="far fa-folder-open fa-fw"></i>

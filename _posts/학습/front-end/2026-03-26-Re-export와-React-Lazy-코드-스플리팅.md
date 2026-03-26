@@ -6,6 +6,7 @@ author:
 date: 2026-03-26 17:00:00 +0900
 categories: [학습, Frontend]
 tags: [학습, React, Re-export, lazy, 코드스플리팅, 성능]
+difficulty: ⭐3
 render_with_liquid: false
 ---
 

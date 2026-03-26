@@ -6,6 +6,7 @@ author:
 date: 2026-03-18 20:20:00 +0900
 categories: [학습, Frontend]
 tags: [학습, TanStack Query, React Query, 캐시, queryKey]
+difficulty: ⭐5
 render_with_liquid: false
 ---
 

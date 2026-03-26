@@ -2,6 +2,12 @@
   Post-specific style
 */
 
+.post-difficulty {
+  font-size: 0.85rem;
+  margin-left: 0.3rem;
+  opacity: 0.85;
+}
+
 @mixin btn-sharing-color($light-color, $important: false) {
   @if $important {
     color: var(--btn-share-color, $light-color) !important;

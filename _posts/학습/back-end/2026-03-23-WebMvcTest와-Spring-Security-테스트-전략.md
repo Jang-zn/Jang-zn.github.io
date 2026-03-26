@@ -6,6 +6,7 @@ author:
 date: 2026-03-23 14:00:00 +0900
 categories: [학습, Backend]
 tags: [학습, WebMvcTest, Spring Security, 테스트, PreAuthorize]
+difficulty: ⭐5
 render_with_liquid: false
 ---
 

@@ -6,6 +6,7 @@ author:
 date: 2026-03-26 10:00:00 +0900
 categories: [학습, Backend]
 tags: [학습, 테스트, Fake, Repository, 추상화, Clean Architecture]
+difficulty: ⭐5
 render_with_liquid: false
 ---
 

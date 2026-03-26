@@ -6,6 +6,7 @@ author:
 date: 2026-03-19 20:00:00 +0900
 categories: [학습, Frontend]
 tags: [학습, SVG, ResizeObserver, 코치마크, React]
+difficulty: ⭐6
 render_with_liquid: false
 ---
 

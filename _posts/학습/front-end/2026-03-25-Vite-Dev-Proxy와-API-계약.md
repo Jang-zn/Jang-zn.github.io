@@ -6,6 +6,7 @@ author:
 date: 2026-03-25 23:00:00 +0900
 categories: [학습, Frontend]
 tags: [학습, Vite, Proxy, CORS, API, 계약]
+difficulty: ⭐3
 render_with_liquid: false
 ---
 

@@ -75,6 +75,11 @@ tail_includes:
       <!-- read time -->
       {% include read-time.html content=content prompt=true %}
 
+      <!-- difficulty -->
+      {% if page.difficulty %}
+      <span class="post-difficulty">{{ page.difficulty }}</span>
+      {% endif %}
+
       <!-- page views -->
       {% if site.google_analytics.pv.proxy_endpoint or site.google_analytics.pv.cache_path %}
       <span>

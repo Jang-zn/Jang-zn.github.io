@@ -6,6 +6,7 @@ author:
 date: 2026-03-25 18:00:00 +0900
 categories: [학습, Backend]
 tags: [학습, 버전관리, Snapshot, Delta, 데이터설계]
+difficulty: ⭐6
 render_with_liquid: false
 ---
 

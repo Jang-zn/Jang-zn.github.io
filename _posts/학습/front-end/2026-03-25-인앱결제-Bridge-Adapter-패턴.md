@@ -6,6 +6,7 @@ author:
 date: 2026-03-25 19:00:00 +0900
 categories: [학습, Frontend]
 tags: [학습, React, Bridge, Adapter, 인앱결제, Toss, 디자인패턴]
+difficulty: ⭐7
 render_with_liquid: false
 ---
 

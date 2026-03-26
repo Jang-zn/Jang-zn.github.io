@@ -6,6 +6,7 @@ author:
 date: 2026-03-25 16:00:00 +0900
 categories: [학습, Backend]
 tags: [학습, Spring, JPA, BaseEntity, Command, DTO, 설계]
+difficulty: ⭐4
 render_with_liquid: false
 ---
 

@@ -6,6 +6,7 @@ author:
 date: 2026-03-25 14:00:00 +0900
 categories: [학습, Backend]
 tags: [학습, Spring, Page, TypeScript, API, 페이지네이션]
+difficulty: ⭐4
 render_with_liquid: false
 ---
 
